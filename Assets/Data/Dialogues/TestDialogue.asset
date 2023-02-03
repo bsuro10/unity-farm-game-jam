@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c7434e56495fc34d94b703eebd14904, type: 3}
+  m_Name: TestDialogue
+  m_EditorClassIdentifier: 
+  sentences:
+  - <speed=50>Well I've been wanting to tell you<speed=5>... <speed=50>That maybe
+    <speed=5>...<pause=.1><speed=60><size=150%> WE SHOULD PLAY<speed=20>!
+  - <speed=50>Don't you dare say no<speed=5>... <speed=60><size=150%><b>FOR REAL</b>!!!

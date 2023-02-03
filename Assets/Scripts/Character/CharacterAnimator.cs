@@ -8,7 +8,7 @@ namespace FarmGame
         private CharacterBasicController characterController;
         private Animator animator;
 
-        protected virtual void Awake()
+        protected virtual void Start()
         {
             animator = GetComponent<Animator>();
             characterController = GetComponent<CharacterBasicController>();
@@ -16,7 +16,7 @@ namespace FarmGame
 
         protected virtual void Update()
         {
-            animator.SetBool("isWalking", characterController.moveDelta != Vector3.zero);
+            animator.SetBool("isWalking", characterController.isWalking);
         }
     }
 }

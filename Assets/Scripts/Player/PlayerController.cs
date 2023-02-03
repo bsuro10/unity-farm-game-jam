@@ -4,6 +4,23 @@ namespace FarmGame
 {
     public class PlayerController : CharacterBasicController
     {
+
+        #region Singleton
+        public static PlayerController Instance { get; private set; }
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                Instance = this;
+            }
+        }
+        #endregion
+
         [Header("Game Layers")]
         [SerializeField] private LayerMask characterLayerMask;
         [SerializeField] private LayerMask BlockingLayerMask;
@@ -11,10 +28,7 @@ namespace FarmGame
         [Header("Interactions")]
         [SerializeField] private float interactionRadius = 0.2f;
 
-        protected override void Awake()
-        {
-            base.Awake();
-        }
+        public bool isInDialogue { get; set; }
 
         protected override void Start()
         {
@@ -23,13 +37,27 @@ namespace FarmGame
 
         void Update()
         {
-            float horizontalInput = Input.GetAxisRaw("Horizontal");
-            float verticalInput = Input.GetAxisRaw("Vertical");
-            moveDelta = new Vector3(horizontalInput, verticalInput, 0);
-            FlipCharacterAccordingToWalkingDirection(moveDelta);
-            MovePlayer(moveDelta);
+            if (!isInDialogue)
+            {
+                float horizontalInput = Input.GetAxisRaw("Horizontal");
+                float verticalInput = Input.GetAxisRaw("Vertical");
+                moveDelta = new Vector3(horizontalInput, verticalInput, 0);
+                isWalking = moveDelta != Vector3.zero;
+                FlipCharacterAccordingToWalkingDirection(moveDelta);
+                MovePlayer(moveDelta);
+            }
+            else
+            {
+                isWalking = false;
+            }
+
             if (Input.GetButtonDown("Interact"))
-                CheckInteraction();
+            {
+                if (isInDialogue)
+                    DialogueManager.Instance.DisplayNextSentence();
+                else
+                    CheckInteraction();
+            }
         }
 
         private void FlipCharacterAccordingToWalkingDirection(Vector3 moveDelta)
