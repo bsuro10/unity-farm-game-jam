@@ -4,6 +4,8 @@ namespace FarmGame
 {
     public class PlayerController : CharacterBasicController
     {
+        [SerializeField] private LayerMask characterLayerMask;
+        [SerializeField] private LayerMask BlockingLayerMask;
 
         protected override void Awake()
         {
@@ -34,7 +36,37 @@ namespace FarmGame
 
         private void MovePlayer(Vector3 moveDelta)
         {
-            transform.Translate(moveDelta.x * Time.deltaTime, moveDelta.y * Time.deltaTime, 0);
+            MovePlayerVertical();
+            MovePlayerHorizontal();
         }
+
+        private void MovePlayerVertical()
+        {
+            RaycastHit2D hit;
+            hit = Physics2D.BoxCast(transform.position,
+                boxCollider.size,
+                0,
+                new Vector2(0, moveDelta.y),
+                Mathf.Abs(moveDelta.y * Time.deltaTime),
+                characterLayerMask.value | BlockingLayerMask.value);
+
+            if (hit.collider == null)
+                transform.Translate(0, moveDelta.y * Time.deltaTime, 0);
+        }
+
+        private void MovePlayerHorizontal()
+        {
+            RaycastHit2D hit;
+            hit = Physics2D.BoxCast(transform.position,
+                boxCollider.size,
+                0,
+                new Vector2(moveDelta.x, 0),
+                Mathf.Abs(moveDelta.x * Time.deltaTime),
+                characterLayerMask.value | BlockingLayerMask.value);
+
+            if (hit.collider == null)
+                transform.Translate(moveDelta.x * Time.deltaTime, 0, 0);
+        }
+
     }
 }
