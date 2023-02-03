@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9377c6649c2fa844932495652315c0d, type: 3}
+  m_Name: AxeTestTool
+  m_EditorClassIdentifier: 
+  name: Axe
+  icon: {fileID: 21300000, guid: da88963f9d2142e4d9251d010deebcb7, type: 2}
+  isDefaultItem: 0
