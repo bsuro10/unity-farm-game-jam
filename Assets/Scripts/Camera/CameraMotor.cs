@@ -1,42 +1,45 @@
 using UnityEngine;
 
-public class CameraMotor : MonoBehaviour
+namespace FarmGame
 {
-    [SerializeField] private Transform focusOn;
-    [SerializeField] private float boundX = 0.25f;
-    [SerializeField] private float boundY = 0.15f;
-
-    void LateUpdate()
+    public class CameraMotor : MonoBehaviour
     {
-        Vector3 delta = Vector3.zero;
+        [SerializeField] private Transform focusOn;
+        [SerializeField] private float boundX = 0.25f;
+        [SerializeField] private float boundY = 0.15f;
 
-        // The difference between where the player is at and where the camera is at
-        float deltaX = focusOn.position.x - transform.position.x;
-        if (deltaX > boundX || deltaX < -boundX)
+        void LateUpdate()
         {
-            if (deltaX > 0)
-            {
-                delta.x = deltaX - boundX;
-            }
-            else
-            {
-                delta.x = deltaX + boundX;
-            }
-        }
+            Vector3 delta = Vector3.zero;
 
-        float deltaY = focusOn.position.y - transform.position.y;
-        if (deltaY > boundY || deltaY < -boundY)
-        {
-            if (deltaY > 0)
+            // The difference between where the player is at and where the camera is at
+            float deltaX = focusOn.position.x - transform.position.x;
+            if (deltaX > boundX || deltaX < -boundX)
             {
-                delta.y = deltaY - boundY;
+                if (deltaX > 0)
+                {
+                    delta.x = deltaX - boundX;
+                }
+                else
+                {
+                    delta.x = deltaX + boundX;
+                }
             }
-            else
-            {
-                delta.y = deltaY + boundY;
-            }
-        }
 
-        transform.position += delta;
+            float deltaY = focusOn.position.y - transform.position.y;
+            if (deltaY > boundY || deltaY < -boundY)
+            {
+                if (deltaY > 0)
+                {
+                    delta.y = deltaY - boundY;
+                }
+                else
+                {
+                    delta.y = deltaY + boundY;
+                }
+            }
+
+            transform.position += delta;
+        }
     }
 }
