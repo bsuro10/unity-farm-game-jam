@@ -8,7 +8,13 @@ namespace FarmGame
         public override void UseTool()
         {
             base.UseTool();
-            Debug.Log("Using the Axe");
+            Vector3 playerPosition = PlayerController.Instance.playerTransform.position;
+            if (TileManager.Instance.IsInteractable(playerPosition))
+            {
+                // TODO: Create a cropsManager to set the tiles related to crops
+                //TileManager.Instance.SetInteractedTile(playerPosition);
+            }
+
         }
     }
 }
