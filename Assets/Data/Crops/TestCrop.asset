@@ -12,6 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4385fe6eb5b6d740b1db2920ea037ac, type: 3}
   m_Name: TestCrop
   m_EditorClassIdentifier: 
-  timeToGrow: 10
-  yield: {fileID: 0}
-  count: 1
+  timeToGrow: 8
+  yield: {fileID: 11400000, guid: 01d3991ec2b6c4b44b36c40ec433c9af, type: 2}
+  yieldAmount: 5
+  stages:
+  - tile: {fileID: 11400000, guid: 72b87b30e74bb11419d66cee37d80cad, type: 2}
+    growthTime: 0
+  - tile: {fileID: 11400000, guid: 3d7355b6c0c151843affb6b57e47f444, type: 2}
+    growthTime: 2
+  - tile: {fileID: 11400000, guid: 4b6241f280c84b64280281d36b67089d, type: 2}
+    growthTime: 4
+  - tile: {fileID: 11400000, guid: f1261232d82445642a9e9d8d3da1e26e, type: 2}
+    growthTime: 6
+  - tile: {fileID: 11400000, guid: b3cc2dc9ba7898745b3ba0f97cff0c24, type: 2}
+    growthTime: 8

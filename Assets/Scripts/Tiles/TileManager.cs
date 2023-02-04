@@ -58,5 +58,15 @@ namespace FarmGame
         {
             SetCustomTile(gridLayout.WorldToCell(position), tile, tilemap);
         }
+
+        public void ClearTile(Vector3Int position, Tilemap tilemap)
+        {
+            SetCustomTile(position, null, tilemap);
+        }
+
+        public void ClearTile(Vector3 position, Tilemap tilemap)
+        {
+            ClearTile(gridLayout.WorldToCell(position), tilemap); ;
+        }
     }
 }

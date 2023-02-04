@@ -48,6 +48,11 @@ namespace FarmGame
                 else
                     CheckInteraction();
             }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                CropsManager.Instance.Harvest(playerTransform.position);
+            }
         }
 
         private void FixedUpdate()

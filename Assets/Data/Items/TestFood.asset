@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7575e4cac5df0224ebaa5c1d14cab342, type: 3}
-  m_Name: TestSeed
+  m_Script: {fileID: 11500000, guid: 72cfa9c4bed15f245bf4f38997a2bfff, type: 3}
+  m_Name: TestFood
   m_EditorClassIdentifier: 
-  name: Test Seed
-  icon: {fileID: 516335133, guid: b00c65e673e33ad4fb2765512a3f7c69, type: 3}
+  name: Test Crop
+  icon: {fileID: -1413057280, guid: b00c65e673e33ad4fb2765512a3f7c69, type: 3}
   isDefaultItem: 0
-  crop: {fileID: 11400000, guid: b0461220d0dd01d4eadace53d8d5adf1, type: 2}

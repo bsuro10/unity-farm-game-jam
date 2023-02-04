@@ -5,7 +5,27 @@ using UnityEngine.Tilemaps;
 
 namespace FarmGame
 {
-    public class CropTile { }
+    public class CropTile 
+    {
+        public int growTimer;
+        public int growStage;
+        public Crop crop;
+        public bool isGrowthCompleted
+        { 
+            get
+            {
+                return (crop != null) && (growTimer >= crop.timeToGrow);
+            }
+        }
+
+        public void Harvested()
+        {
+            growTimer = 0;
+            growStage = 0;
+            crop = null;
+        }
+
+    }
 
     public class CropsManager : MonoBehaviour
     {
@@ -30,13 +50,31 @@ namespace FarmGame
 
         private TileManager tileManager;
         private Dictionary<Vector3Int, CropTile> crops;
-        private Dictionary<Vector3Int, Seed> seeds;
 
         private void Start()
         {
+            TimeManager.Instance.onTimeTick += OnTimeTick;
             tileManager = TileManager.Instance;
             crops = new Dictionary<Vector3Int, CropTile>();
-            seeds = new Dictionary<Vector3Int, Seed>();
+        }
+
+        public void OnTimeTick()
+        {
+            foreach (KeyValuePair<Vector3Int, CropTile> crop in crops)
+            {
+                Vector3Int cellPosition = crop.Key;
+                CropTile cropTile = crop.Value;
+                if ((cropTile.crop != null) && (!cropTile.isGrowthCompleted))
+                {
+                    cropTile.growTimer++;
+
+                    if (cropTile.growTimer >= cropTile.crop.stages[cropTile.growStage].growthTime)
+                    {
+                        tileManager.SetCustomTile(cellPosition, cropTile.crop.stages[cropTile.growStage].tile, seedsTilemap);
+                        cropTile.growStage++;
+                    }
+                }
+            }
         }
 
         public void PlowGround(Vector3 position)
@@ -53,23 +91,40 @@ namespace FarmGame
         public bool Seed(Vector3 position, Crop cropToSeed)
         {
             Vector3Int cellPositionForTile = tileManager.gridLayout.WorldToCell(position);
-            if (IsCropExist(cellPositionForTile) && !IsSeedExist(cellPositionForTile))
+            if (CanSeedBePlanted(cellPositionForTile, cropToSeed))
             {
-                /*seeds.Add(cellPositionForTile, seed);
-                tileManager.SetCustomTile(position, seed.seedTile, seedsTilemap);*/
+                tileManager.SetCustomTile(position, cropToSeed.stages[0].tile, seedsTilemap);
+                crops[cellPositionForTile].crop = cropToSeed;
                 return true;
             }
             return false;
         }
 
-        private bool IsCropExist(Vector3Int position)
+        public void Harvest(Vector3 position)
         {
-            return crops.ContainsKey(position);
+            Vector3Int cellPositionForTile = tileManager.gridLayout.WorldToCell(position);
+            if (crops.ContainsKey(cellPositionForTile))
+            {
+                CropTile cropTile = crops[cellPositionForTile];
+                if (cropTile.isGrowthCompleted)
+                {
+                    ItemSpawnManager.Instance.SpawnItem(
+                        seedsTilemap.GetCellCenterWorld(cellPositionForTile),
+                        cropTile.crop.yield,
+                        cropTile.crop.yieldAmount
+                    );
+                    tileManager.ClearTile(cellPositionForTile, seedsTilemap);
+                    tileManager.SetCustomTile(cellPositionForTile, plowTile, tileManager.interactableMap);
+                    cropTile.Harvested();
+                }
+            }
         }
 
-        private bool IsSeedExist(Vector3Int position)
+        private bool CanSeedBePlanted(Vector3Int position, Crop cropToSeed)
         {
-            return seeds.ContainsKey(position);
+            return crops.ContainsKey(position) && 
+                crops[position].crop == null &&
+                cropToSeed.stages.Length > 0;
         }
         
     }
