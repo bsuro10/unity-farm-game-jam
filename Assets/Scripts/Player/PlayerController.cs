@@ -21,12 +21,16 @@ namespace FarmGame
         }
         #endregion
 
+        [Header("Movement")]
+        [SerializeField] private float speed = 5f;
+
         [Header("Game Layers")]
         [SerializeField] private LayerMask characterLayerMask;
         [SerializeField] private LayerMask BlockingLayerMask;
 
         [Header("Interactions")]
         [SerializeField] private float interactionRadius = 0.2f;
+        [SerializeField] public Transform playerTransform;
 
         public bool isInDialogue { get; set; }
 
@@ -37,11 +41,27 @@ namespace FarmGame
 
         void Update()
         {
+            if (Input.GetButtonDown("Interact"))
+            {
+                if (isInDialogue)
+                    DialogueManager.Instance.DisplayNextSentence();
+                else
+                    CheckInteraction();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                CropsManager.Instance.Harvest(playerTransform.position);
+            }
+        }
+
+        private void FixedUpdate()
+        {
             if (!isInDialogue)
             {
                 float horizontalInput = Input.GetAxisRaw("Horizontal");
                 float verticalInput = Input.GetAxisRaw("Vertical");
-                moveDelta = new Vector3(horizontalInput, verticalInput, 0);
+                moveDelta = new Vector3(horizontalInput * speed, verticalInput * speed, 0);
                 isWalking = moveDelta != Vector3.zero;
                 FlipCharacterAccordingToWalkingDirection(moveDelta);
                 MovePlayer(moveDelta);
@@ -49,14 +69,6 @@ namespace FarmGame
             else
             {
                 isWalking = false;
-            }
-
-            if (Input.GetButtonDown("Interact"))
-            {
-                if (isInDialogue)
-                    DialogueManager.Instance.DisplayNextSentence();
-                else
-                    CheckInteraction();
             }
         }
 

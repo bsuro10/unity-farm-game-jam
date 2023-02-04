@@ -22,6 +22,8 @@ namespace FarmGame
         }
         #endregion
 
+        private const int ALPHA_KEY_OFFSET = 49;
+
         public delegate void OnToolsChanged();
         public OnToolsChanged onToolsChanged;
 
@@ -31,6 +33,14 @@ namespace FarmGame
         private void Start()
         {
             tools = new List<Tool>();
+        }
+
+        void Update()
+        {
+            for (int i = 0; i < tools.Count; i++)
+            {
+                InitInputForKeyIndex(i);
+            }
         }
 
         public bool Equip(Tool tool)
@@ -54,6 +64,16 @@ namespace FarmGame
 
             if (onToolsChanged != null)
                 onToolsChanged.Invoke();
+        }
+
+        private void InitInputForKeyIndex(int index)
+        {
+            KeyCode indexKeyCode = (KeyCode)(index + ALPHA_KEY_OFFSET);
+            if (Input.GetKeyDown(indexKeyCode))
+            {
+                int toolSlotPressed = ((int)indexKeyCode) - ALPHA_KEY_OFFSET;
+                tools[toolSlotPressed].UseTool();
+            }
         }
     }
 }

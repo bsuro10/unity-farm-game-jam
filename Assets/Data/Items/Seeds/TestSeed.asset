@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9377c6649c2fa844932495652315c0d, type: 3}
-  m_Name: AxeTestTool
+  m_Script: {fileID: 11500000, guid: 7575e4cac5df0224ebaa5c1d14cab342, type: 3}
+  m_Name: TestSeed
   m_EditorClassIdentifier: 
-  name: Axe
-  icon: {fileID: 21300000, guid: da88963f9d2142e4d9251d010deebcb7, type: 2}
+  name: Test Seed
+  icon: {fileID: 516335133, guid: b00c65e673e33ad4fb2765512a3f7c69, type: 3}
   isDefaultItem: 0
+  crop: {fileID: 11400000, guid: b0461220d0dd01d4eadace53d8d5adf1, type: 2}

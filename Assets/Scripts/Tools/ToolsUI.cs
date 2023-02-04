@@ -19,14 +19,6 @@ namespace FarmGame
             InitKeyIndexForToolSlots();
         }
 
-        void Update()
-        {
-            for (int i = 0; i < toolsManager.tools.Count; i++)
-            {
-                InitInputForKeyIndex(i);
-            }
-        }
-
         private void UpdateUI()
         {
             for (int i = 0; i < slots.Length; i++)
@@ -47,16 +39,6 @@ namespace FarmGame
             for (int i = 0; i < slots.Length; i++)
             {
                 slots[i].InitKeyIndex(i + 1);
-            }
-        }
-
-        private void InitInputForKeyIndex(int index)
-        {
-            KeyCode indexKeyCode = (KeyCode)(index + ALPHA_KEY_OFFSET);
-            if (Input.GetKeyDown(indexKeyCode))
-            {
-                int toolSlotPressed = ((int)indexKeyCode) - ALPHA_KEY_OFFSET;
-                toolsManager.tools[toolSlotPressed].UseTool();
             }
         }
 

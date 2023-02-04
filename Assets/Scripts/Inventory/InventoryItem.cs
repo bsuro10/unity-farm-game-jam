@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace FarmGame
 {
     [System.Serializable]
@@ -8,10 +6,10 @@ namespace FarmGame
         public Item item;
         public int amount;
 
-        public InventoryItem(Item item)
+        public InventoryItem(Item item, int amount)
         {
             this.item = item;
-            this.amount = 1;
+            this.amount = amount;
         }
     }
 }

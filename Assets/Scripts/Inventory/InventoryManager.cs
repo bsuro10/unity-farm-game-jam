@@ -33,7 +33,7 @@ namespace FarmGame
             items = new List<InventoryItem>();
         }
 
-        public bool Add(Item item)
+        public bool Add(Item item, int amount)
         {
             if (!item.isDefaultItem)
             {
@@ -45,9 +45,9 @@ namespace FarmGame
 
                 int inventoryItemIndex = items.FindIndex(inventoryItem => inventoryItem.item.Equals(item));
                 if (inventoryItemIndex != -1)
-                    items[inventoryItemIndex].amount++;
+                    items[inventoryItemIndex].amount += amount;
                 else
-                    items.Add(new InventoryItem(item)); 
+                    items.Add(new InventoryItem(item, amount)); 
 
                 if (onItemChangedCallback != null)
                     onItemChangedCallback.Invoke();
