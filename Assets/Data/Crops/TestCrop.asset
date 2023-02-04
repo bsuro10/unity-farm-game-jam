@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9377c6649c2fa844932495652315c0d, type: 3}
-  m_Name: AxeTestTool
+  m_Script: {fileID: 11500000, guid: b4385fe6eb5b6d740b1db2920ea037ac, type: 3}
+  m_Name: TestCrop
   m_EditorClassIdentifier: 
-  name: Axe
-  icon: {fileID: -765164721, guid: a507d5a83ee5a30409ad072f60c0d5fa, type: 3}
-  isDefaultItem: 0
+  timeToGrow: 10
+  yield: {fileID: 0}
+  count: 1

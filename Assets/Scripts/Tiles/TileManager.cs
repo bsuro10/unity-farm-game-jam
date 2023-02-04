@@ -21,11 +21,11 @@ namespace FarmGame
         }
         #endregion
 
-        [SerializeField] private Tilemap interactableMap;
+        [SerializeField] public Tilemap interactableMap;
         [SerializeField] private Tile hiddenInteractableTile;
         [SerializeField] private Tile visibleInteractableTile;
 
-        private GridLayout gridLayout;
+        public GridLayout gridLayout { get; private set; }
 
         private void Start()
         {
@@ -38,15 +38,25 @@ namespace FarmGame
             }
         }
 
-        public bool IsInteractable(Vector3 position)
+        public bool IsInteractable(Vector3Int position)
         {
-            TileBase tile = interactableMap.GetTile(gridLayout.WorldToCell(position));
+            TileBase tile = interactableMap.GetTile(position);
             return (tile != null) && (tile.name == hiddenInteractableTile.name);
         }
 
-        public void SetCustomTile(Vector3 position, Tile tile)
+        public bool IsInteractable(Vector3 position)
         {
-            interactableMap.SetTile(gridLayout.WorldToCell(position), tile);
+            return IsInteractable(gridLayout.WorldToCell(position));
+        }
+
+        public void SetCustomTile(Vector3Int position, Tile tile, Tilemap tilemap)
+        {
+            tilemap.SetTile(position, tile);
+        }
+
+        public void SetCustomTile(Vector3 position, Tile tile, Tilemap tilemap)
+        {
+            SetCustomTile(gridLayout.WorldToCell(position), tile, tilemap);
         }
     }
 }

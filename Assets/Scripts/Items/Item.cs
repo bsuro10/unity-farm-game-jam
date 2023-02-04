@@ -11,8 +11,7 @@ namespace FarmGame
 
         public virtual void Use()
         {
-            Debug.Log("Using " + name);
-            RemoveFromInventory(); // TODO: For debugging purposes
+            Debug.Log("Using Item: " + name);
         }
 
         public void RemoveFromInventory()
