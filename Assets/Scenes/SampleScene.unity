@@ -1024,6 +1024,7 @@ GameObject:
   - component: {fileID: 573797789}
   - component: {fileID: 573797790}
   - component: {fileID: 573797791}
+  - component: {fileID: 573797792}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1191,6 +1192,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectibleItemPrefab: {fileID: 7163169661378229015, guid: 789565af4ca09cf44bb4a495a80e45ea, type: 3}
+--- !u!114 &573797792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573797783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd13f1c8afd6f5e4b9e46a456400c357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentActiveQuest: {fileID: 11400000, guid: 7287b7238d663e443a29a12e1e432612, type: 2}
+  questsHistory: []
 --- !u!1001 &591499350
 PrefabInstance:
   m_ObjectHideFlags: 0
