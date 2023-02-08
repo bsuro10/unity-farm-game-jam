@@ -11,7 +11,9 @@ namespace FarmGame
         {
             base.Interact();
             if (npcData != null && dialogue != null)
+            {
                 DialogueManager.Instance.StartDialogue(npcData, dialogue);
+            }
         }
 
     }

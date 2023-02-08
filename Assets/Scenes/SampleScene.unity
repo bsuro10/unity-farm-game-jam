@@ -1204,8 +1204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd13f1c8afd6f5e4b9e46a456400c357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentActiveQuest: {fileID: 11400000, guid: 7287b7238d663e443a29a12e1e432612, type: 2}
-  questsHistory: []
 --- !u!1001 &591499350
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2628,6 +2626,7 @@ MonoBehaviour:
   anim: {fileID: 916341423}
   nameText: {fileID: 1775459597}
   bodyText: {fileID: 1821013456}
+  anonNpcData: {fileID: 11400000, guid: 521a132637bc4b343bb0855c51e820a1, type: 2}
 --- !u!1001 &937726394
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3166,6 +3165,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1111876537}
   m_CullTransparentMesh: 1
+--- !u!1 &1217034960 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 590933065525250874, guid: 23eb8050b6220654d865cab744e5168d, type: 3}
+  m_PrefabInstance: {fileID: 590933066302468127}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1217034966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217034960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28307457deb832c46b4c3d3c5b30f05b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quest: {fileID: 11400000, guid: 7287b7238d663e443a29a12e1e432612, type: 2}
+  questDialogue: {fileID: 1217034967}
+  onCompleteQuestDialogue: {fileID: 1217034973}
+--- !u!114 &1217034967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217034960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 475ac9aeeee5fca40b4da8cae92290b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueData: {fileID: 11400000, guid: 3661da3be687616429eba3a0dd09b93f, type: 2}
+  onDialogueFinishEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1217034973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217034960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 475ac9aeeee5fca40b4da8cae92290b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueData: {fileID: 11400000, guid: 188396c7188f20f419d642b9d696ce45, type: 2}
+  onDialogueFinishEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1246003647
 GameObject:
   m_ObjectHideFlags: 0

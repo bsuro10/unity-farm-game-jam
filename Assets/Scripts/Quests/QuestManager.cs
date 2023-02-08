@@ -6,37 +6,66 @@ namespace FarmGame
 {
     public class QuestManager : MonoBehaviour
     {
-        public Quest currentActiveQuest;
-        public List<Quest> questsHistory;
+        #region Singleton
+        public static QuestManager Instance { get; private set; }
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                Instance = this;
+            }
+        }
+        #endregion
+
+        private Dictionary<string, Quest> activeQuests;
+        private Dictionary<string, Quest> completedQuests;
 
         private void Start()
         {
-            // TODO: Debugging
-            if (currentActiveQuest != null)
-            {
-                currentActiveQuest.Initialize();
-                currentActiveQuest.OnQuestCompleted.AddListener(OnQuestCompleted);
-            }
+            activeQuests = new Dictionary<string, Quest>();
+            completedQuests = new Dictionary<string, Quest>();
         }
 
         public void AddQuest(Quest quest)
         {
-            if (currentActiveQuest == null)
+            if (CanQuestBeAdded(quest))
             {
-                currentActiveQuest = quest;
-                currentActiveQuest.Initialize();
-                currentActiveQuest.OnQuestCompleted.AddListener(OnQuestCompleted);
+                quest.Initialize();
+                activeQuests.Add(quest.id, quest);
+                activeQuests[quest.id].OnQuestCompleted.AddListener(OnQuestCompleted);
+                Debug.Log("Adding a new quest: " + quest.name);
             }
         }
 
-        public void OnQuestCompleted(Quest quest)
+        private void OnQuestCompleted(Quest quest)
         {
-            if (currentActiveQuest != null)
+            // TODO: Give reward to player
+            activeQuests.Remove(quest.id);
+            completedQuests.Add(quest.id, quest);
+            Debug.Log("Completed the quest: " + quest.name);
+        }
+
+        public bool CanQuestBeAdded(Quest quest)
+        {
+            if (activeQuests.ContainsKey(quest.id) || completedQuests.ContainsKey(quest.id))
+                return false;
+
+            return isQuestPrerequisiteCompleted(quest);
+        }
+
+        private bool isQuestPrerequisiteCompleted(Quest quest)
+        {
+            foreach (Quest prerequisiteQuest in quest.prerequisitesQuests)
             {
-                questsHistory.Add(currentActiveQuest);
-                currentActiveQuest.OnQuestCompleted.RemoveAllListeners();
-                currentActiveQuest = null;
+                if (!completedQuests.ContainsKey(prerequisiteQuest.name))
+                    return false;
             }
+            return true;
         }
     }
 }

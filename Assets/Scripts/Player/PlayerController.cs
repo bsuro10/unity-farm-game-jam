@@ -122,7 +122,12 @@ namespace FarmGame
             {
                 foreach (Collider2D hit in hits)
                 {
-                    if (hit.transform.GetComponent<Interactable>())
+                    if (hit.transform.GetComponent<QuestGiver>() &&
+                        hit.transform.GetComponent<QuestGiver>().InteractWithQuest())
+                    {
+                        return;
+                    }
+                    else if (hit.transform.GetComponent<Interactable>())
                     {
                         hit.transform.GetComponent<Interactable>().Interact();
                         return;

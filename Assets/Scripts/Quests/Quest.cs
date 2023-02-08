@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,9 +11,9 @@ namespace FarmGame
     public class QuestCompletedEvent : UnityEvent<Quest> { }
 
     [CreateAssetMenu(menuName = "Quests/New Quest", fileName = "New Quest")]
-    public class Quest : ScriptableObject
+    public class Quest : ScriptableObjectWithIdAttribute
     {
-        [System.Serializable]
+        [Serializable]
         public struct Info
         {
             public string name;
@@ -21,10 +23,9 @@ namespace FarmGame
         [Header("Info")]
         public Info information;
 
-        [System.Serializable]
+        [Serializable]
         public struct Reward
         {
-            public int exp;
             public int currency;
             public List<Item> items;
         }
@@ -34,6 +35,9 @@ namespace FarmGame
 
         [Header("Goals")]
         public List<QuestGoal> goals;
+
+        [Header("Prerequisites")]
+        public List<Quest> prerequisitesQuests;
 
         public bool isCompleted { get; protected set; }
         public QuestCompletedEvent OnQuestCompleted;
@@ -49,15 +53,16 @@ namespace FarmGame
             }
         }
 
+        public void CompleteQuest()
+        {
+            OnQuestCompleted.Invoke(this);
+            OnQuestCompleted.RemoveAllListeners();
+        }
+
         private void CheckGoals()
         {
             isCompleted = goals.All(g => g.isCompleted);
-            if (isCompleted)
-            {
-                // Give reward
-                OnQuestCompleted.Invoke(this);
-                OnQuestCompleted.RemoveAllListeners();
-            }
         }
+
     }
 }

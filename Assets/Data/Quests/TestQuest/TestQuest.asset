@@ -16,8 +16,8 @@ MonoBehaviour:
     name: Quest number 1
     description: Help the old man with his peppers
   reward:
-    exp: 0
     currency: 0
     items: []
   goals:
   - {fileID: 11400000, guid: 17471c83dc288f242ac8b38b886f05fc, type: 2}
+  prerequisitesQuests: []

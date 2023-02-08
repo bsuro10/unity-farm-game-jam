@@ -27,6 +27,7 @@ namespace FarmGame
         [SerializeField] private Animator anim;
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private TextMeshProCustom bodyText;
+        [SerializeField] private NpcData anonNpcData;
 
         private Queue<string> sentences;
         private UnityEvent onDialogueFinishEvent;
@@ -49,6 +50,11 @@ namespace FarmGame
             {
                 sentences.Enqueue(sentence);
             }
+        }
+
+        public void StartDialogue(Dialogue dialogue)
+        {
+            StartDialogue(anonNpcData, dialogue);
         }
 
         public void DisplayNextSentence()
