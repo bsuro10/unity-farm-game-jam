@@ -33,36 +33,37 @@ namespace FarmGame
 
         public void AddQuest(Quest quest)
         {
-            if (CanQuestBeAdded(quest))
+            QuestData questData = quest.questData;
+            if (CanQuestBeAdded(questData))
             {
-                quest.Initialize();
-                activeQuests.Add(quest.id, quest);
-                activeQuests[quest.id].OnQuestCompleted.AddListener(OnQuestCompleted);
-                Debug.Log("Adding a new quest: " + quest.name);
+                activeQuests.Add(questData.id, quest);
+                activeQuests[questData.id].onQuestCompleted.AddListener(OnQuestCompleted);
+                Debug.Log("Adding a new quest: " + questData.name);
             }
         }
 
         private void OnQuestCompleted(Quest quest)
         {
-            // TODO: Give reward to player
-            activeQuests.Remove(quest.id);
-            completedQuests.Add(quest.id, quest);
-            Debug.Log("Completed the quest: " + quest.name);
+            // TODO: Give reward to player, or not?
+            QuestData questData = quest.questData;
+            activeQuests.Remove(questData.id);
+            completedQuests.Add(questData.id, quest);
+            Debug.Log("Completed the quest: " + questData.name);
         }
 
-        public bool CanQuestBeAdded(Quest quest)
+        public bool CanQuestBeAdded(QuestData questData)
         {
-            if (activeQuests.ContainsKey(quest.id) || completedQuests.ContainsKey(quest.id))
+            if (activeQuests.ContainsKey(questData.id) || completedQuests.ContainsKey(questData.id))
                 return false;
 
-            return isQuestPrerequisiteCompleted(quest);
+            return isQuestPrerequisiteCompleted(questData);
         }
 
-        private bool isQuestPrerequisiteCompleted(Quest quest)
+        private bool isQuestPrerequisiteCompleted(QuestData questData)
         {
-            foreach (Quest prerequisiteQuest in quest.prerequisitesQuests)
+            foreach (QuestData prerequisiteQuest in questData.prerequisitesQuests)
             {
-                if (!completedQuests.ContainsKey(prerequisiteQuest.name))
+                if (!completedQuests.ContainsKey(prerequisiteQuest.id))
                     return false;
             }
             return true;

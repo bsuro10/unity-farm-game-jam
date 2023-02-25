@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TestDialogue
   m_EditorClassIdentifier: 
   sentences:
-  - <speed=50>Well I've been wanting to tell you<speed=5>... <speed=50>That maybe
-    <speed=5>...<pause=.1><speed=60><size=150%> WE SHOULD PLAY<speed=20>!
-  - <speed=50>Don't you dare say no<speed=5>... <speed=60><size=150%><b>FOR REAL</b>!!!
+  - npcData: {fileID: 0}
+    sentence: <speed=50>Dialogue Test.
+  - npcData: {fileID: 0}
+    sentence: <speed=50>Dialogue Test 2.

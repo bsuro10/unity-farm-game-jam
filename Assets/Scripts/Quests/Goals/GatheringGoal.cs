@@ -3,10 +3,9 @@ using UnityEngine;
 
 namespace FarmGame
 {
-    [CreateAssetMenu(menuName = "Quests/New Gathering Goal", fileName = "New Gathering Goal")]
     public class GatheringGoal : QuestGoal
     {
-        public Item itemToGather;
+        [SerializeField] private Item itemToGather;
 
         public override string GetDescription()
         {
@@ -18,6 +17,13 @@ namespace FarmGame
             base.Initialize();
             CheckIfAlreadyGathered();
             InventoryManager.Instance.onItemChangedCallback += OnItemChanged;
+        }
+
+        public override void CompleteGoal()
+        {
+            base.CompleteGoal();
+            InventoryManager.Instance.onItemChangedCallback -= OnItemChanged;
+            InventoryManager.Instance.Remove(itemToGather, requiredAmount);
         }
 
         public void OnItemChanged()

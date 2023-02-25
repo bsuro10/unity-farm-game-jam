@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,59 +9,47 @@ namespace FarmGame
 {
     public class QuestCompletedEvent : UnityEvent<Quest> { }
 
-    [CreateAssetMenu(menuName = "Quests/New Quest", fileName = "New Quest")]
-    public class Quest : ScriptableObjectWithIdAttribute
+    public class Quest
     {
-        [Serializable]
-        public struct Info
+        public QuestData questData { get; private set; }
+        public QuestStatus questStatus { get; private set; }
+        public QuestCompletedEvent onQuestCompleted { get; private set; }
+
+        public Quest(QuestData questData)
         {
-            public string name;
-            public string description;
-        }
-
-        [Header("Info")]
-        public Info information;
-
-        [Serializable]
-        public struct Reward
-        {
-            public int currency;
-            public List<Item> items;
-        }
-
-        [Header("Reward")]
-        public Reward reward;
-
-        [Header("Goals")]
-        public List<QuestGoal> goals;
-
-        [Header("Prerequisites")]
-        public List<Quest> prerequisitesQuests;
-
-        public bool isCompleted { get; protected set; }
-        public QuestCompletedEvent OnQuestCompleted;
-
-        public void Initialize()
-        {
-            isCompleted = false;
-            OnQuestCompleted = new QuestCompletedEvent();
-            foreach (QuestGoal goal in goals)
+            this.questData = questData;
+            questStatus = QuestStatus.Started;
+            onQuestCompleted = new QuestCompletedEvent();
+            foreach (QuestGoal goal in questData.goals)
             {
+                goal.onGoalStatusChanged.AddListener(delegate { CheckGoals(); });
                 goal.Initialize();
-                goal.OnGoalCompleted.AddListener(delegate { CheckGoals(); });
             }
         }
 
         public void CompleteQuest()
         {
-            OnQuestCompleted.Invoke(this);
-            OnQuestCompleted.RemoveAllListeners();
+            foreach (QuestGoal goal in questData.goals)
+            {
+                goal.CompleteGoal();
+            }
+            onQuestCompleted.Invoke(this);
+            onQuestCompleted.RemoveAllListeners();
         }
 
         private void CheckGoals()
         {
-            isCompleted = goals.All(g => g.isCompleted);
+            if (questData.goals.All(g => g.goalStatus == GoalStatus.Completed))
+            {
+                questStatus = QuestStatus.Completed;
+            }
+            else 
+            {
+                questStatus = QuestStatus.Started;
+            }
+            Debug.Log("Quest Status: " + questStatus);
         }
-
     }
+
+    public enum QuestStatus { None, Started, Completed }
 }

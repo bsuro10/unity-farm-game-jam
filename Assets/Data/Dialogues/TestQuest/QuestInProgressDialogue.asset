@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c7434e56495fc34d94b703eebd14904, type: 3}
-  m_Name: TestQuestDialogue
+  m_Name: QuestInProgressDialogue
   m_EditorClassIdentifier: 
   sentences:
-  - <speed=50>Please bring me 20 peppers!
+  - npcData: {fileID: 0}
+    sentence: <speed=50>Did you get all the peppers?

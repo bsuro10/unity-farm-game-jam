@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 590933065525250872}
   - component: {fileID: 590933065525250873}
   - component: {fileID: 590933065525250870}
+  - component: {fileID: 2018574503}
   m_Layer: 6
   m_Name: TestNpc
   m_TagString: Untagged
@@ -143,3 +144,19 @@ MonoBehaviour:
   onDialogueFinishEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2018574503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590933065525250874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28307457deb832c46b4c3d3c5b30f05b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questData: {fileID: 11400000, guid: 5d8ef253871cd7a4c9c1c1b051db3588, type: 2}
+  questStartDialogueData: {fileID: 11400000, guid: ed0e2c1d4f2f64544beac0e3fa03c2d3, type: 2}
+  questInProgressDialogueData: {fileID: 11400000, guid: b4c5beadbf606bf4e990c2d37bcc2e48, type: 2}
+  questCompletedDialogueData: {fileID: 11400000, guid: cfec78d67a092d7498a02102d5225711, type: 2}

@@ -7,12 +7,27 @@ namespace FarmGame
         [SerializeField] private NpcData npcData;
         [SerializeField] private Dialogue dialogue;
 
+        private QuestGiver questGiver;
+
+        private void Start()
+        {
+            questGiver = GetComponent<QuestGiver>();
+        }
+
         public override void Interact()
         {
             base.Interact();
-            if (npcData != null && dialogue != null)
+
+            if (npcData == null)
+                return;
+
+            if (questGiver && questGiver.InteractWithQuest())
             {
-                DialogueManager.Instance.StartDialogue(npcData, dialogue);
+                return;
+            }
+            else if (dialogue)
+            {
+                DialogueManager.Instance.StartDialogue(dialogue);
             }
         }
 

@@ -3,40 +3,48 @@ using UnityEngine.Events;
 
 namespace FarmGame
 {
-    public class GoalCompletedEvent : UnityEvent { }
+    public class GoalStatusChangedEvent : UnityEvent { }
 
-    public abstract class QuestGoal : ScriptableObject
+    [System.Serializable]
+    public abstract class QuestGoal
     {
-        protected string description;
-        public int currentAmount { get; protected set; }
-        public int requiredAmount;
-        public bool isCompleted { get; protected set; }
-        [HideInInspector] public GoalCompletedEvent OnGoalCompleted;
+        [SerializeField] protected int requiredAmount;
 
-        public virtual string GetDescription()
+        public GoalStatusChangedEvent onGoalStatusChanged { get; protected set; }
+        public GoalStatus goalStatus { get; protected set; }
+
+        protected string description;
+        protected int currentAmount;
+
+        public QuestGoal()
         {
-            return description;
+            goalStatus = GoalStatus.Inprogress;
+            onGoalStatusChanged = new GoalStatusChangedEvent();
         }
 
-        public virtual void Initialize()
+        public virtual string GetDescription() { return description; }
+
+        public virtual void Initialize() { }
+
+        public virtual void CompleteGoal ()
         {
-            isCompleted = false;
-            OnGoalCompleted = new GoalCompletedEvent();
+            onGoalStatusChanged.RemoveAllListeners();
         }
 
         protected void Evaluate()
         {
             if (currentAmount >= requiredAmount)
             {
-                Complete();
+                goalStatus = GoalStatus.Completed;
             }
-        }
-
-        private void Complete()
-        {
-            isCompleted = true;
-            OnGoalCompleted.Invoke();
-            OnGoalCompleted.RemoveAllListeners();
+            else
+            {
+                goalStatus = GoalStatus.Inprogress;
+            }
+            onGoalStatusChanged.Invoke();
+            Debug.Log("Goal Status: " + goalStatus);
         }
     }
 }
+
+public enum GoalStatus { Inprogress, Completed }

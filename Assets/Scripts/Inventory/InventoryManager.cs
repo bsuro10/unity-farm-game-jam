@@ -58,17 +58,31 @@ namespace FarmGame
 
         public void Remove(Item item)
         {
+            Remove(item, 1);
+        }
+
+        public void Remove(Item item, int amount)
+        {
             int inventoryItemIndex = items.FindIndex(inventoryItem => inventoryItem.item.Equals(item));
             if (inventoryItemIndex != -1)
             {
-                items[inventoryItemIndex].amount--;
-                if (items[inventoryItemIndex].amount == 0)
+                items[inventoryItemIndex].amount -= amount;
+                if (items[inventoryItemIndex].amount <= 0)
                     items.RemoveAt(inventoryItemIndex);
             }
-            
+
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
         }
 
+        public void Update()
+        {
+            // For debugging purpose only
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                if (items.Count > 0 && items[0].item)
+                    Remove(items[0].item);
+            }
+        }
     }
 }

@@ -1,36 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace FarmGame
 {
     public class QuestGiver : MonoBehaviour
     {
-        [SerializeField] private Quest quest;
-        [SerializeField] private Dialogue questDialogue;
-        [SerializeField] private Dialogue onCompleteQuestDialogue;
+        [SerializeField] private QuestData questData;
+        [SerializeField] private DialogueData questStartDialogueData;
+        [SerializeField] private DialogueData questInProgressDialogueData;
+        [SerializeField] private DialogueData questCompletedDialogueData;
 
-        private bool questHaveBeenCompleted = false;
+        private Quest quest;
 
-        public bool isQuestAvailable
+        private void Start()
+        {
+            
+        }
+
+        public bool canQuestBeAdded
         {
             get
             {
-                return QuestManager.Instance.CanQuestBeAdded(quest);
+                return QuestManager.Instance.CanQuestBeAdded(questData);
             }
         }
 
         public bool InteractWithQuest()
         {
             bool wasInteractingWithQuest = true;
-            if (isQuestAvailable)
+            if (canQuestBeAdded)
             {
                 GiveQuest();
             }
-            else if (quest.isCompleted && !questHaveBeenCompleted)
+            else if ((quest != null) && (quest.questStatus == QuestStatus.Started))
             {
-                CompleteQuest();
+                ShowInProgressDialogue();
+            }
+            else if ((quest != null) && (quest.questStatus == QuestStatus.Completed))
+            {
+                ShowCompletedDialogue();
             }
             else
             {
@@ -41,15 +48,49 @@ namespace FarmGame
 
         private void GiveQuest()
         {
-            DialogueManager.Instance.StartDialogue(questDialogue);
-            questDialogue.onDialogueFinishEvent.AddListener(delegate { QuestManager.Instance.AddQuest(quest); });
+            quest = new Quest(questData);
+            if (questStartDialogueData)
+            {
+                DialogueManager.Instance.StartDialogue(questStartDialogueData, delegate { StartQuest(); });
+            }
+            else
+            {
+                StartQuest();
+            }
+        }
+
+        private void StartQuest()
+        {
+            if (quest != null)
+            {
+                QuestManager.Instance.AddQuest(quest);
+            }
+        }
+
+        private void ShowCompletedDialogue()
+        {
+            if (questCompletedDialogueData)
+            {
+                DialogueManager.Instance.StartDialogue(questCompletedDialogueData, delegate { CompleteQuest(); });
+            }
+            else
+            {
+                CompleteQuest();
+            }
         }
 
         private void CompleteQuest()
         {
-            DialogueManager.Instance.StartDialogue(onCompleteQuestDialogue);
-            onCompleteQuestDialogue.onDialogueFinishEvent.AddListener(delegate { quest.CompleteQuest(); });
-            questHaveBeenCompleted = true;
+            quest.CompleteQuest();
+            quest = null;
+        }
+
+        private void ShowInProgressDialogue()
+        {
+            if (questInProgressDialogueData)
+            {
+                DialogueManager.Instance.StartDialogue(questInProgressDialogueData, null);
+            }
         }
 
     }

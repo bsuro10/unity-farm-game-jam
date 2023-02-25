@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4fe38f82d20d91429908a78791dba27, type: 3}
-  m_Name: TestGatheringGoal
+  m_Script: {fileID: 11500000, guid: 4c7434e56495fc34d94b703eebd14904, type: 3}
+  m_Name: QuestStartDialogue
   m_EditorClassIdentifier: 
-  requiredAmount: 4
-  itemToGather: {fileID: 11400000, guid: 01d3991ec2b6c4b44b36c40ec433c9af, type: 2}
+  sentences:
+  - npcData: {fileID: 0}
+    sentence: <speed=50>Please bring me some peppers!
