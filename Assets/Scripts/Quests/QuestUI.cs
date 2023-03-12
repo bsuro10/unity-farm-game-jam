@@ -12,6 +12,9 @@ namespace FarmGame {
         [SerializeField] private Transform questItemListParent;
         [SerializeField] private GameObject goalItemPrefab;
         [SerializeField] private Transform goalItemListParent;
+        [SerializeField] private GameObject rewardItemPrefab;
+        [SerializeField] private Transform rewardItemListParent;
+        [SerializeField] private GameObject rewardTitleText;
         [SerializeField] private TextMeshProUGUI questDetailsTitle;
         [SerializeField] private TextMeshProUGUI questDetailsDescription;
 
@@ -48,6 +51,14 @@ namespace FarmGame {
                 if (goalSlotUI != null)
                     goalSlotUI.InitializeGoalSlot(questGoal);
             }
+            foreach (Item item in quest.questData.reward.items)
+            {
+                rewardTitleText.SetActive(true);
+                GameObject rewardItem = Instantiate(rewardItemPrefab, rewardItemListParent);
+                RewardSlotUI rewardSlotUI = rewardItem.GetComponent<RewardSlotUI>();
+                if (rewardSlotUI != null)
+                    rewardSlotUI.InitializeRewardSlot(item);
+            }
         }
 
         public void ClearQuestSlotDetails()
@@ -56,8 +67,13 @@ namespace FarmGame {
             {
                 Destroy(goalItem.gameObject);
             }
+            foreach (Transform rewardItem in rewardItemListParent.GetComponentInChildren<Transform>())
+            {
+                Destroy(rewardItem.gameObject);
+            }
             questDetailsTitle.text = "";
             questDetailsDescription.text = "";
+            rewardTitleText.SetActive(false);
             selectedQuestId = null;
         }
 
