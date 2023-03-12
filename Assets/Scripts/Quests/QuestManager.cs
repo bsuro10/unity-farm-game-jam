@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace FarmGame
 {
+    public class QuestAdded : UnityEvent<string, Quest> { }
+
     public class QuestManager : MonoBehaviour
     {
         #region Singleton
@@ -22,8 +25,11 @@ namespace FarmGame
         }
         #endregion
 
-        private Dictionary<string, Quest> activeQuests;
-        private Dictionary<string, Quest> completedQuests;
+        public delegate void OnQuestAdded(string questId, Quest quest);
+        public OnQuestAdded onQuestAdded;
+
+        public Dictionary<string, Quest> activeQuests { get; private set; }
+        public Dictionary<string, Quest> completedQuests { get; private set; }
 
         private void Start()
         {
@@ -39,6 +45,9 @@ namespace FarmGame
                 activeQuests.Add(questData.id, quest);
                 activeQuests[questData.id].onQuestCompleted.AddListener(OnQuestCompleted);
                 Debug.Log("Adding a new quest: " + questData.name);
+                
+                if (onQuestAdded != null)
+                    onQuestAdded.Invoke(questData.id, quest);
             }
         }
 

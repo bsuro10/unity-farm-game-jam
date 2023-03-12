@@ -16,10 +16,9 @@ MonoBehaviour:
     name: Old man in need
     description: Please help the old man get some food
   reward:
-    currency: 0
-    items: []
-  prerequisitesQuests:
-  - {fileID: 11400000, guid: 5d8ef253871cd7a4c9c1c1b051db3588, type: 2}
+    items:
+    - {fileID: 11400000, guid: 3c0c1c72302f65f46aa07575824dbb5f, type: 2}
+  prerequisitesQuests: []
   goals:
   - rid: 7565861035413340162
   references:

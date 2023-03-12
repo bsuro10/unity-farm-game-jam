@@ -21,7 +21,6 @@ namespace FarmGame
         [Serializable]
         public struct Reward
         {
-            public int currency;
             public List<Item> items;
         }
 
