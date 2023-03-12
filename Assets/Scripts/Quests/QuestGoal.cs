@@ -18,13 +18,16 @@ namespace FarmGame
 
         public QuestGoal()
         {
-            goalStatus = GoalStatus.Inprogress;
             onGoalStatusChanged = new GoalStatusChangedEvent();
         }
 
         public virtual string GetDescription() { return description; }
 
-        public virtual void Initialize() { }
+        public virtual void Initialize() 
+        {
+            currentAmount = 0;
+            goalStatus = GoalStatus.Inprogress;
+        }
 
         public virtual void CompleteGoal ()
         {

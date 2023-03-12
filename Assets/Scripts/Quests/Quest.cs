@@ -11,6 +11,9 @@ namespace FarmGame
 
     public class Quest
     {
+        public delegate void OnQuestUpdated(Quest quest);
+        public OnQuestUpdated onQuestUpdated;
+
         public QuestData questData { get; private set; }
         public QuestStatus questStatus { get; private set; }
         public QuestCompletedEvent onQuestCompleted { get; private set; }
@@ -47,7 +50,9 @@ namespace FarmGame
             {
                 questStatus = QuestStatus.Started;
             }
-            Debug.Log("Quest Status: " + questStatus);
+
+            if (onQuestUpdated != null)
+                onQuestUpdated.Invoke(this);
         }
     }
 

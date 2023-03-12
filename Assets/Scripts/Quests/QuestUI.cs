@@ -37,19 +37,16 @@ namespace FarmGame {
 
         public void DisplayQuestSlotDetails(Quest quest)
         {
-            if (selectedQuestId == null || selectedQuestId != quest.questData.id)
+            ClearQuestSlotDetails();
+            selectedQuestId = quest.questData.id;
+            questDetailsTitle.text = quest.questData.information.name;
+            questDetailsDescription.text = quest.questData.information.description;
+            foreach (QuestGoal questGoal in quest.questData.goals)
             {
-                ClearQuestSlotDetails();
-                selectedQuestId = quest.questData.id;
-                questDetailsTitle.text = quest.questData.information.name;
-                questDetailsDescription.text = quest.questData.information.description;
-                foreach (QuestGoal questGoal in quest.questData.goals)
-                {
-                    GameObject goalItem = Instantiate(goalItemPrefab, goalItemListParent);
-                    GoalSlotUI goalSlotUI = goalItem.GetComponent<GoalSlotUI>();
-                    if (goalSlotUI != null)
-                        goalSlotUI.InitializeGoalSlot(questGoal);
-                }
+                GameObject goalItem = Instantiate(goalItemPrefab, goalItemListParent);
+                GoalSlotUI goalSlotUI = goalItem.GetComponent<GoalSlotUI>();
+                if (goalSlotUI != null)
+                    goalSlotUI.InitializeGoalSlot(questGoal);
             }
         }
 
@@ -73,6 +70,19 @@ namespace FarmGame {
                 questSlotUI.InitializeQuestSlot(quest);
                 questSlotUI.onQuestSlotUIClicked += DisplayQuestSlotDetails;
             }
+            quest.onQuestUpdated += UpdateQuestItem;
+            quest.onQuestCompleted.AddListener(delegate { RemoveQuestItem(questItem); });
+        }
+
+        private void RemoveQuestItem(GameObject questItem)
+        {
+            Destroy(questItem);
+        }
+
+        private void UpdateQuestItem(Quest quest)
+        {
+            if (selectedQuestId == quest.questData.id)
+                DisplayQuestSlotDetails(quest);
         }
 
     }
