@@ -18,8 +18,7 @@ MonoBehaviour:
   reward:
     currency: 0
     items: []
-  prerequisitesQuests:
-  - {fileID: 11400000, guid: 5d8ef253871cd7a4c9c1c1b051db3588, type: 2}
+  prerequisitesQuests: []
   goals:
   - rid: 7565861035413340162
   references:

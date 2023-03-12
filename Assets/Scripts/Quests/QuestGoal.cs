@@ -8,13 +8,13 @@ namespace FarmGame
     [System.Serializable]
     public abstract class QuestGoal
     {
-        [SerializeField] protected int requiredAmount;
+        [SerializeField] public int requiredAmount;
 
         public GoalStatusChangedEvent onGoalStatusChanged { get; protected set; }
         public GoalStatus goalStatus { get; protected set; }
 
         protected string description;
-        protected int currentAmount;
+        public int currentAmount { get; protected set; }
 
         public QuestGoal()
         {
