@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f58a9a13a81f7024ca326dfa409d3c72, type: 3}
+  m_Name: New Quest
+  m_EditorClassIdentifier: 
+  information:
+    name: Old man in need
+    description: Please help the old man get some food
+  reward:
+    items: []
+  prerequisitesQuests: []
+  questStartDialogueData: {fileID: 11400000, guid: ed0e2c1d4f2f64544beac0e3fa03c2d3, type: 2}
+  questInProgressDialogueData: {fileID: 11400000, guid: b4c5beadbf606bf4e990c2d37bcc2e48, type: 2}
+  questCompletedDialogueData: {fileID: 11400000, guid: cfec78d67a092d7498a02102d5225711, type: 2}
+  nextQuest: {fileID: 11400000, guid: 601d47db6a74add40b835d5498a3370e, type: 2}
+  goals:
+  - rid: 7565861035413340162
+  references:
+    version: 2
+    RefIds:
+    - rid: 7565861035413340162
+      type: {class: GatheringGoal, ns: FarmGame, asm: Assembly-CSharp}
+      data:
+        requiredAmount: 5
+        itemToGather: {fileID: 11400000, guid: 01d3991ec2b6c4b44b36c40ec433c9af, type: 2}
