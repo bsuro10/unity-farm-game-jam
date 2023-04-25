@@ -1278,7 +1278,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 6046826927545172007}
   nameText: {fileID: 6046826928270598021}
-  nameTextOutline: {fileID: 0}
   bodyText: {fileID: 6046826928181933912}
   anonNpcData: {fileID: 11400000, guid: 521a132637bc4b343bb0855c51e820a1, type: 2}
 --- !u!1 &6046826927577382871
