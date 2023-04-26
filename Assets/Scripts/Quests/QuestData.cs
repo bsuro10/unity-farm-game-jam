@@ -45,6 +45,7 @@ namespace FarmGame
         {
             goals.Add(questGoal);
         }
+
     }
 
 }

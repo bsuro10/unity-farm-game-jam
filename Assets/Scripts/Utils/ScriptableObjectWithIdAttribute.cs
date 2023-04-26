@@ -4,7 +4,7 @@ namespace FarmGame
 {
     public class ScriptableObjectWithIdAttribute : ScriptableObject
     {
-        public string id { get; private set; }
+        public string id;
 
         private void OnValidate()
         {
