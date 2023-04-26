@@ -15,7 +15,7 @@ namespace FarmGame
 
         public void SetCollectibeItem(Item item, int amount)
         {
-            SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+            SpriteRenderer renderer = GetComponentInChildren<SpriteRenderer>();
             this.item = item;
             this.amount = amount;
             renderer.sprite = item.icon;

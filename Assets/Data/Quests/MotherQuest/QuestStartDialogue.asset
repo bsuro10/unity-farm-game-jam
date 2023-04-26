@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c7434e56495fc34d94b703eebd14904, type: 3}
+  m_Name: QuestStartDialogue
+  m_EditorClassIdentifier: 
+  sentences:
+  - npcData: {fileID: 11400000, guid: d0552d0a180f22041ba9edc567609965, type: 2}
+    sentence: '<speed=30>Hey Kayle, I was looking for you.
+
+      Heard from your
+      dad you finished your training at the farm!
+
+      I am sure you are very excited.
+
+'
+  - npcData: {fileID: 11400000, guid: 6fcb38fd7a4c9fe44a04ddf95729c090, type: 2}
+    sentence: <speed=30>Thanks mom, It was so great to grow and harvest my own food.
+  - npcData: {fileID: 11400000, guid: d0552d0a180f22041ba9edc567609965, type: 2}
+    sentence: '<speed=30>I am happy to hear that.
+
+      Do you mind helping me out
+      with dinner today?'
+  - npcData: {fileID: 11400000, guid: 6fcb38fd7a4c9fe44a04ddf95729c090, type: 2}
+    sentence: <speed=30>Of course, no problem!
+  - npcData: {fileID: 11400000, guid: d0552d0a180f22041ba9edc567609965, type: 2}
+    sentence: <speed=30>You dad gave you some seeds and I need you to grow them for
+      dinner, it would help me a lot. We need peppers, carrots and cabbage.

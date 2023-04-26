@@ -25,9 +25,7 @@ namespace FarmGame
         [SerializeField] private float interactionRadius = 0.2f;
         [SerializeField] public Transform playerTransform;
 
-        public bool isInDialogue { get; set; }
-
-        private Vector2 moveDelta; 
+        private Vector2 moveDeltaInput; 
 
         protected override void Start()
         {
@@ -49,8 +47,8 @@ namespace FarmGame
                 CropsManager.Instance.Harvest(playerTransform.position);
             }
 
-            moveDelta.x = Input.GetAxisRaw("Horizontal");
-            moveDelta.y = Input.GetAxisRaw("Vertical");
+            moveDeltaInput.x = Input.GetAxisRaw("Horizontal");
+            moveDeltaInput.y = Input.GetAxisRaw("Vertical");
             
         }
 
@@ -58,7 +56,7 @@ namespace FarmGame
         {
             if (!isInDialogue)
             {
-                Move(moveDelta);
+                Move(moveDeltaInput);
             }
             else
             {

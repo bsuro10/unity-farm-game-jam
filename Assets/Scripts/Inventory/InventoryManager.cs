@@ -33,6 +33,11 @@ namespace FarmGame
             items = new List<InventoryItem>();
         }
 
+        public void Add(Item item)
+        {
+            Add(item, 1);
+        }
+
         public bool Add(Item item, int amount)
         {
             if (!item.isDefaultItem)

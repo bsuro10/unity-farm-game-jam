@@ -53,8 +53,8 @@ namespace FarmGame
 
         private void OnQuestCompleted(Quest quest)
         {
-            // TODO: Give reward to player, or not?
             QuestData questData = quest.questData;
+            questData.reward.items.ForEach(item => InventoryManager.Instance.Add(item));
             activeQuests.Remove(questData.id);
             completedQuests.Add(questData.id, quest);
             Debug.Log("Completed the quest: " + questData.name);

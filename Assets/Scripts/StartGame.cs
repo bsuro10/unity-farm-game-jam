@@ -1,22 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-namespace FarmGame
+public class StartGame : MonoBehaviour
 {
-    [RequireComponent(typeof(Dialogue))]
-    public class StartGame : MonoBehaviour
+    public void LoadFirstScene()
     {
-
-        public Dialogue dialogue;
-
-        private void Start()
-        {
-            StartDialogue();
-        }
-
-        public void StartDialogue()
-        {
-            DialogueManager.Instance.StartDialogue(dialogue);
-            gameObject.SetActive(false);
-        }
+        SceneManager.LoadSceneAsync(1);
     }
 }

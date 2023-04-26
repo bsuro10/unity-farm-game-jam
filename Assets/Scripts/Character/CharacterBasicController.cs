@@ -20,6 +20,7 @@ namespace FarmGame
         [SerializeField] private bool flipSpriteToChangeDirection;
 
         public bool isWalking { get; protected set; }
+        public bool isInDialogue { get; set; }
         public Vector2 moveDelta { get; protected set; }
         protected BoxCollider2D boxCollider;
         protected Rigidbody2D body;

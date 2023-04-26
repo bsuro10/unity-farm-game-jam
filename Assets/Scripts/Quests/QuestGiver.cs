@@ -7,6 +7,12 @@ namespace FarmGame
         [SerializeField] public QuestData questData;
 
         private Quest quest;
+        private CharacterBasicController characterBasicController;
+
+        private void Start()
+        {
+            characterBasicController = GetComponent<CharacterBasicController>();
+        }
 
         public bool canQuestBeAdded
         {
@@ -43,7 +49,7 @@ namespace FarmGame
             quest = new Quest(questData);
             if (questData.questStartDialogueData)
             {
-                DialogueManager.Instance.StartDialogue(questData.questStartDialogueData, delegate { StartQuest(); });
+                DialogueManager.Instance.StartDialogue(questData.questStartDialogueData, delegate { StartQuest(); }, characterBasicController);
             }
             else
             {
@@ -63,7 +69,7 @@ namespace FarmGame
         {
             if (questData.questCompletedDialogueData)
             {
-                DialogueManager.Instance.StartDialogue(questData.questCompletedDialogueData, delegate { CompleteQuest(); });
+                DialogueManager.Instance.StartDialogue(questData.questCompletedDialogueData, delegate { CompleteQuest(); }, characterBasicController);
             }
             else
             {
@@ -83,7 +89,7 @@ namespace FarmGame
         {
             if (questData.questInProgressDialogueData)
             {
-                DialogueManager.Instance.StartDialogue(questData.questInProgressDialogueData, null);
+                DialogueManager.Instance.StartDialogue(questData.questInProgressDialogueData, null, characterBasicController);
             }
         }
 

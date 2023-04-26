@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4385fe6eb5b6d740b1db2920ea037ac, type: 3}
+  m_Name: CabbageCrop
+  m_EditorClassIdentifier: 
+  timeToGrow: 25
+  yield: {fileID: 11400000, guid: cd158fc81123dea44af293ba7cbd3882, type: 2}
+  yieldAmount: 1
+  stages:
+  - tile: {fileID: 11400000, guid: 786c5d970d5f6214ba62a83c75236761, type: 2}
+    growthTime: 0
+  - tile: {fileID: 11400000, guid: 07c5a9fba8636ed4e90f530d0561c3ae, type: 2}
+    growthTime: 5
+  - tile: {fileID: 11400000, guid: 861ff32251d29bd459081f0f090019b4, type: 2}
+    growthTime: 12
+  - tile: {fileID: 11400000, guid: 21126345e34b6b040947a60fd3909280, type: 2}
+    growthTime: 20
+  - tile: {fileID: 11400000, guid: 2dfdaeb33e0ccbe47994e02598d0a7e6, type: 2}
+    growthTime: 25

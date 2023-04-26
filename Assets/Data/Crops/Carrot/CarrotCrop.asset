@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4385fe6eb5b6d740b1db2920ea037ac, type: 3}
+  m_Name: CarrotCrop
+  m_EditorClassIdentifier: 
+  timeToGrow: 15
+  yield: {fileID: 11400000, guid: b555786410826a94a89936ceba514581, type: 2}
+  yieldAmount: 3
+  stages:
+  - tile: {fileID: 11400000, guid: 3ea6194448d5b94418960b2fa005beb0, type: 2}
+    growthTime: 0
+  - tile: {fileID: 11400000, guid: 8c6bcffcd39edbf4ca28f55bb09b04b1, type: 2}
+    growthTime: 3
+  - tile: {fileID: 11400000, guid: 0c0ec4e5fc95a8b40a1b79a2e6da0932, type: 2}
+    growthTime: 8
+  - tile: {fileID: 11400000, guid: 7ac2bfb045ac791459cd5c71afe53e36, type: 2}
+    growthTime: 12
+  - tile: {fileID: 11400000, guid: 8911c9114b64e0947abb07cdc8d14e4f, type: 2}
+    growthTime: 15

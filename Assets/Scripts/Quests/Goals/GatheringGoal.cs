@@ -6,6 +6,7 @@ namespace FarmGame
     public class GatheringGoal : QuestGoal
     {
         [SerializeField] private Item itemToGather;
+        [SerializeField] private bool removeItemUponCompletion;
 
         public override string GetDescription()
         {
@@ -23,7 +24,8 @@ namespace FarmGame
         {
             base.CompleteGoal();
             InventoryManager.Instance.onItemChangedCallback -= OnItemChanged;
-            InventoryManager.Instance.Remove(itemToGather, requiredAmount);
+            if (removeItemUponCompletion)
+                InventoryManager.Instance.Remove(itemToGather, requiredAmount);
         }
 
         public void OnItemChanged()

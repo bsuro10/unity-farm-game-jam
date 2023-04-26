@@ -7,10 +7,12 @@ namespace FarmGame
         [SerializeField] private Dialogue dialogue;
 
         private QuestGiver questGiver;
+        private CharacterBasicController characterBasicController;
 
         private void Start()
         {
             questGiver = GetComponent<QuestGiver>();
+            characterBasicController = GetComponent<CharacterBasicController>();
         }
 
         public override void Interact()
@@ -23,9 +25,13 @@ namespace FarmGame
             }
             else if (dialogue)
             {
-                DialogueManager.Instance.StartDialogue(dialogue);
+                DialogueManager.Instance.StartDialogue(dialogue, characterBasicController);
             }
         }
 
+        public void Destroy()
+        {
+            Destroy(gameObject);
+        }
     }
 }

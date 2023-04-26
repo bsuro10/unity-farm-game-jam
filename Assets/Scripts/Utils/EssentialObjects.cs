@@ -8,7 +8,7 @@ namespace FarmGame
     {
         private void Awake()
         {
-            DontDestroyOnLoad(gameObject);
+            /*DontDestroyOnLoad(gameObject);*/
         }
     }
 }

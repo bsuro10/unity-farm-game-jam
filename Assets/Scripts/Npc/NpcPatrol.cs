@@ -25,7 +25,7 @@ namespace FarmGame {
 
         void FixedUpdate()
         {
-            if (canWalkToNextWaypoint)
+            if (canWalkToNextWaypoint && !characterBasicController.isInDialogue)
             {
                 WalkTowardsNextWayPoint();
             }
