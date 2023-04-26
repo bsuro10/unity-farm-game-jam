@@ -16,6 +16,8 @@ namespace FarmGame
 
         protected virtual void Update()
         {
+            animator.SetFloat("Horizontal", characterController.moveDelta.x);
+            animator.SetFloat("Vertical", characterController.moveDelta.y);
             animator.SetBool("isWalking", characterController.isWalking);
         }
     }

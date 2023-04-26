@@ -13,7 +13,7 @@ namespace FarmGame
 
         private void Awake()
         {
-            sentences = new Queue<string>();
+            sentences = new Queue<DialogueSentence>();
             bodyText.ReadText("");
 
             if (Instance != null && Instance != this)
@@ -33,8 +33,9 @@ namespace FarmGame
         [SerializeField] private TextMeshProCustom bodyText;
         [SerializeField] private NpcData anonNpcData;
 
-        private Queue<string> sentences;
+        private Queue<DialogueSentence> sentences;
         private UnityEvent onDialogueFinishEvent;
+        private CharacterBasicController targetNpcController;
 
         private void Start()
         {
@@ -43,17 +44,22 @@ namespace FarmGame
 
         public void StartDialogue(Dialogue dialogue)
         {
-            ShowDialogue(dialogue.dialogueData, dialogue.onDialogueFinishEvent);
+            ShowDialogue(dialogue.dialogueData, dialogue.onDialogueFinishEvent, null);
         }
 
-        public void StartDialogue(DialogueData dialogueData, UnityAction action)
+        public void StartDialogue(Dialogue dialogue, CharacterBasicController targetNpcController)
+        {
+            ShowDialogue(dialogue.dialogueData, dialogue.onDialogueFinishEvent, targetNpcController);
+        }
+
+        public void StartDialogue(DialogueData dialogueData, UnityAction action, CharacterBasicController targetNpcController)
         {
             UnityEvent onDialogueFinishEvent = new UnityEvent();
 
             if (action != null)
                 onDialogueFinishEvent.AddListener(action);
 
-            ShowDialogue(dialogueData, onDialogueFinishEvent);
+            ShowDialogue(dialogueData, onDialogueFinishEvent, targetNpcController);
         }
 
         public void DisplayNextSentence()
@@ -63,26 +69,31 @@ namespace FarmGame
                 EndDialogue();
                 return;
             }
-            string sentence = sentences.Dequeue();
-            bodyText.ReadText(sentence);
+
+            NpcData npcData = anonNpcData;
+            DialogueSentence dialogueSentence = sentences.Dequeue();
+            if (dialogueSentence.npcData != null)
+                npcData = dialogueSentence.npcData;
+
+            nameText.text = npcData.name;
+            nameText.color = npcData.nameColor;
+            bodyText.ReadText(dialogueSentence.sentence);
         }
 
-        private void ShowDialogue(DialogueData dialogueData, UnityEvent onDialogueFinishEvent)
+        private void ShowDialogue(DialogueData dialogueData, UnityEvent onDialogueFinishEvent, CharacterBasicController targetNpcController)
         {
             anim.SetBool("isShown", true);
             sentences.Clear();
             this.onDialogueFinishEvent = onDialogueFinishEvent;
+            this.targetNpcController = targetNpcController;
             PlayerController.Instance.isInDialogue = true;
+
+            if (this.targetNpcController != null)
+                this.targetNpcController.isInDialogue = true;
+
             foreach (DialogueSentence dialogueSentence in dialogueData.sentences)
             {
-                NpcData npcData = anonNpcData;
-
-                if (dialogueSentence.npcData)
-                    npcData = dialogueSentence.npcData;
-                
-                nameText.text = npcData.name;
-                nameText.color = npcData.nameColor;
-                sentences.Enqueue(dialogueSentence.sentence);
+                sentences.Enqueue(dialogueSentence);
             }
         }
 
@@ -90,8 +101,13 @@ namespace FarmGame
         {
             anim.SetBool("isShown", false);
             PlayerController.Instance.isInDialogue = false;
+
+            if (targetNpcController != null)
+                targetNpcController.isInDialogue = false;
+
             onDialogueFinishEvent.Invoke();
             bodyText.ReadText("");
+            nameText.text = "";
         }
 
         private void DialogueShown_AnimatonEvent()

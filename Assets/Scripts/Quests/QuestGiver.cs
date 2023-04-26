@@ -4,16 +4,14 @@ namespace FarmGame
 {
     public class QuestGiver : MonoBehaviour
     {
-        [SerializeField] private QuestData questData;
-        [SerializeField] private DialogueData questStartDialogueData;
-        [SerializeField] private DialogueData questInProgressDialogueData;
-        [SerializeField] private DialogueData questCompletedDialogueData;
+        [SerializeField] public QuestData questData;
 
         private Quest quest;
+        private CharacterBasicController characterBasicController;
 
         private void Start()
         {
-            
+            characterBasicController = GetComponent<CharacterBasicController>();
         }
 
         public bool canQuestBeAdded
@@ -27,7 +25,7 @@ namespace FarmGame
         public bool InteractWithQuest()
         {
             bool wasInteractingWithQuest = true;
-            if (canQuestBeAdded)
+            if ((questData != null) && (canQuestBeAdded))
             {
                 GiveQuest();
             }
@@ -49,9 +47,9 @@ namespace FarmGame
         private void GiveQuest()
         {
             quest = new Quest(questData);
-            if (questStartDialogueData)
+            if (questData.questStartDialogueData)
             {
-                DialogueManager.Instance.StartDialogue(questStartDialogueData, delegate { StartQuest(); });
+                DialogueManager.Instance.StartDialogue(questData.questStartDialogueData, delegate { StartQuest(); }, characterBasicController);
             }
             else
             {
@@ -69,9 +67,9 @@ namespace FarmGame
 
         private void ShowCompletedDialogue()
         {
-            if (questCompletedDialogueData)
+            if (questData.questCompletedDialogueData)
             {
-                DialogueManager.Instance.StartDialogue(questCompletedDialogueData, delegate { CompleteQuest(); });
+                DialogueManager.Instance.StartDialogue(questData.questCompletedDialogueData, delegate { CompleteQuest(); }, characterBasicController);
             }
             else
             {
@@ -82,14 +80,16 @@ namespace FarmGame
         private void CompleteQuest()
         {
             quest.CompleteQuest();
+            if (quest.questData.nextQuest != null)
+                questData = quest.questData.nextQuest;
             quest = null;
         }
 
         private void ShowInProgressDialogue()
         {
-            if (questInProgressDialogueData)
+            if (questData.questInProgressDialogueData)
             {
-                DialogueManager.Instance.StartDialogue(questInProgressDialogueData, null);
+                DialogueManager.Instance.StartDialogue(questData.questInProgressDialogueData, null, characterBasicController);
             }
         }
 

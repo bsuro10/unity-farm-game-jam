@@ -30,6 +30,14 @@ namespace FarmGame
         [Header("Prerequisites")]
         public List<QuestData> prerequisitesQuests;
 
+        [Header("Optional Dialogues")]
+        public DialogueData questStartDialogueData;
+        public DialogueData questInProgressDialogueData;
+        public DialogueData questCompletedDialogueData;
+
+        [Header("Optional Trigger Next Quest")]
+        public QuestData nextQuest;
+
         [Header("Goals")]
         [SerializeReference] public List<QuestGoal> goals;
 
@@ -37,6 +45,7 @@ namespace FarmGame
         {
             goals.Add(questGoal);
         }
+
     }
 
 }

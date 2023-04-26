@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f58a9a13a81f7024ca326dfa409d3c72, type: 3}
+  m_Name: Help with dinner
+  m_EditorClassIdentifier: 
+  information:
+    name: Help with dinner
+    description: Gather food to help mom make dinner
+  reward:
+    items: []
+  prerequisitesQuests:
+  - {fileID: 11400000, guid: 442f35e2952a26c4ab80855da58f738c, type: 2}
+  questStartDialogueData: {fileID: 11400000, guid: 6b2d3be8ca066cc43a5873af1c04d08d, type: 2}
+  questInProgressDialogueData: {fileID: 11400000, guid: ed8e41355ef2e4d44a1f7342bfcec9bc, type: 2}
+  questCompletedDialogueData: {fileID: 11400000, guid: 63e86c41acedad44b81ca3017c38c8ae, type: 2}
+  nextQuest: {fileID: 0}
+  goals:
+  - rid: 8201567895677566977
+  - rid: 8201567895677566978
+  - rid: 8201567895677566979
+  references:
+    version: 2
+    RefIds:
+    - rid: 8201567895677566977
+      type: {class: GatheringGoal, ns: FarmGame, asm: Assembly-CSharp}
+      data:
+        requiredAmount: 6
+        itemToGather: {fileID: 11400000, guid: 821f04e1d5863bb4d8076c7e9168d0b1, type: 2}
+        removeItemUponCompletion: 1
+    - rid: 8201567895677566978
+      type: {class: GatheringGoal, ns: FarmGame, asm: Assembly-CSharp}
+      data:
+        requiredAmount: 3
+        itemToGather: {fileID: 11400000, guid: b555786410826a94a89936ceba514581, type: 2}
+        removeItemUponCompletion: 1
+    - rid: 8201567895677566979
+      type: {class: GatheringGoal, ns: FarmGame, asm: Assembly-CSharp}
+      data:
+        requiredAmount: 1
+        itemToGather: {fileID: 11400000, guid: cd158fc81123dea44af293ba7cbd3882, type: 2}
+        removeItemUponCompletion: 1

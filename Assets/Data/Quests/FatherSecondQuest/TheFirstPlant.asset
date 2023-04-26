@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f58a9a13a81f7024ca326dfa409d3c72, type: 3}
+  m_Name: TheFirstPlant
+  m_EditorClassIdentifier: 
+  information:
+    name: The First Plant
+    description: Plant your first seed as part of your training
+  reward:
+    items:
+    - {fileID: 11400000, guid: 19b205722d4691a4ea008c5d68793487, type: 2}
+    - {fileID: 11400000, guid: 9e9d041d43ae4244294b47f819269c61, type: 2}
+    - {fileID: 11400000, guid: 4b47445907eca334c82d90c1d6b872cd, type: 2}
+  prerequisitesQuests: []
+  questStartDialogueData: {fileID: 11400000, guid: 2185935a954c07c46bd869564c8d6f71, type: 2}
+  questInProgressDialogueData: {fileID: 0}
+  questCompletedDialogueData: {fileID: 11400000, guid: 88936e55a40fa824681735d9e3c69c11, type: 2}
+  nextQuest: {fileID: 0}
+  goals:
+  - rid: 8201567895677566976
+  references:
+    version: 2
+    RefIds:
+    - rid: 8201567895677566976
+      type: {class: GatheringGoal, ns: FarmGame, asm: Assembly-CSharp}
+      data:
+        requiredAmount: 1
+        itemToGather: {fileID: 11400000, guid: 821f04e1d5863bb4d8076c7e9168d0b1, type: 2}
+        removeItemUponCompletion: 0

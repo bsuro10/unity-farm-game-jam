@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4385fe6eb5b6d740b1db2920ea037ac, type: 3}
+  m_Name: PepperCrop
+  m_EditorClassIdentifier: 
+  timeToGrow: 20
+  yield: {fileID: 11400000, guid: 821f04e1d5863bb4d8076c7e9168d0b1, type: 2}
+  yieldAmount: 3
+  stages:
+  - tile: {fileID: 11400000, guid: 72b87b30e74bb11419d66cee37d80cad, type: 2}
+    growthTime: 0
+  - tile: {fileID: 11400000, guid: 3d7355b6c0c151843affb6b57e47f444, type: 2}
+    growthTime: 5
+  - tile: {fileID: 11400000, guid: 4b6241f280c84b64280281d36b67089d, type: 2}
+    growthTime: 10
+  - tile: {fileID: 11400000, guid: f1261232d82445642a9e9d8d3da1e26e, type: 2}
+    growthTime: 15
+  - tile: {fileID: 11400000, guid: b3cc2dc9ba7898745b3ba0f97cff0c24, type: 2}
+    growthTime: 20

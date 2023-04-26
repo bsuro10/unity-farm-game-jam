@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c7434e56495fc34d94b703eebd14904, type: 3}
+  m_Name: QuestCompletedDialogue
+  m_EditorClassIdentifier: 
+  sentences:
+  - npcData: {fileID: 11400000, guid: 843bf28d5b3e1234f9f70d090a25352d, type: 2}
+    sentence: '<speed=30>Very good job son!
+
+      You just found a pepper seed,
+      which your mom uses to cook your favorite food.
+
+      With this seed you can
+      now grow more peppers.'
+  - npcData: {fileID: 11400000, guid: 843bf28d5b3e1234f9f70d090a25352d, type: 2}
+    sentence: <speed=30>I am giving you a <b><color=blue>hoe</b><color=black> as
+      a reward for your task's completion. Now you can use the hoe to plant the seed.
+  - npcData: {fileID: 11400000, guid: 843bf28d5b3e1234f9f70d090a25352d, type: 2}
+    sentence: <speed=30>First equip the hoe by clicking it inside your inventory.
+      Then it will show up on your tools bar just on top of the screen.
+  - npcData: {fileID: 11400000, guid: 843bf28d5b3e1234f9f70d090a25352d, type: 2}
+    sentence: '<speed=30>In the farm area, surrounded by fences you can click <b>1</b>
+      to use the hoe and plow the ground.
+
+      Remember, you can only plant seed
+      once the ground is prepared.'
+  - npcData: {fileID: 11400000, guid: 6fcb38fd7a4c9fe44a04ddf95729c090, type: 2}
+    sentence: <speed=30>Thanks dad! This is a nice hoe, can't believe it's my first
+      hoe!
+  - npcData: {fileID: 11400000, guid: 843bf28d5b3e1234f9f70d090a25352d, type: 2}
+    sentence: <speed=30>You're welcome son, talk to me again when you are ready to
+      take the next training!
